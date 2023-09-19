@@ -1,12 +1,8 @@
-import { ReactNode, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import Grid from './Grid'
 import Column from './Column'
-import Example2 from './Example2'
-import { css } from '@emotion/react'
-import { Text, TextInput } from '@mantine/core'
+import { TextInput } from '@mantine/core'
 
 export type Person = {
       firstName: string;

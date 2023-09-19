@@ -1,10 +1,8 @@
-import { useMemo } from 'react';
+
 import {
   MantineReactTable,
   useMantineReactTable,
-  type MRT_ColumnDef,
 } from 'mantine-react-table';
-import { Person } from './App';
 
 
 interface Props{
