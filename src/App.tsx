@@ -55,7 +55,7 @@ function App() {
   return (
     <>
       <div className="card">
-        <Grid data={data} >
+        <Grid gridData={data} >
           <Column key={'firstName'} 
                   header={'FirstName'}
                   render={(cell:any)=><TextInput value={cell} />}               
