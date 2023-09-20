@@ -2,7 +2,7 @@
 export interface ColumnProps{
   key:string;
   header:string;
-  render?:(cell?:any)=> void
+  render?:(cell?:any,onChange?:(value:any)=>void)=> void
   style?:string;
   onClickHandler?:(e?:any)=> void;
   onDblClickHandler?:(e?:any)=> void;
