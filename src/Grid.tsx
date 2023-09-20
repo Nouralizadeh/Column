@@ -1,17 +1,17 @@
 
-import Example from './Example';
-import { MRT_Cell } from 'mantine-react-table';
+
+import { MRT_Cell, MantineReactTable, useMantineReactTable } from 'mantine-react-table';
 
 interface Props{
     children: any;
-    data:any;
+    gridData:any[];
 }
 
 function Grid(props:Props) {
-    let _columns: { header: any; accessorKey: any;Cell:any;}[] = [];
+    let columns: { header: any; accessorKey: any;Cell:any;}[] = [];
     
     props.children.map((child: any) =>{       
-      _columns.push({
+      columns.push({
       header: child.props.header, 
       accessorKey: child.key,
       Cell: child.props.render?
@@ -21,11 +21,13 @@ function Grid(props:Props) {
   }
     
     );
-    console.log(_columns);
+    const data=props.gridData
+    const table = useMantineReactTable({
+      columns,
+      data, //must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
+    });
     
-  return (
-    <Example data={props.data} columns={_columns}/>
-  )
+  return  <MantineReactTable table={table} />;
 }
 
 export default Grid
