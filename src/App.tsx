@@ -4,6 +4,11 @@ import Grid from './Grid'
 import Column from './Column'
 import { TextInput } from '@mantine/core'
 import { useState } from 'react';
+import { createTheme, MantineProvider } from '@mantine/core';
+
+const theme = createTheme({
+  /** Your theme override here */
+});
 
 export type Person = {
     firstName: string;
@@ -56,7 +61,7 @@ function App() {
   const [persons, setPersons] = useState<Person[]>(data)
 
   return (
-    <>
+    <MantineProvider theme={theme}>
       <div className="card">
         <Grid gridData={persons} setGridData={setPersons}>
           <Column key={'firstName'} 
@@ -69,7 +74,7 @@ function App() {
           <Column key={'state'} header={'State'}/>
         </Grid>
       </div>
-    </>
+    </MantineProvider>
   )
 }
 
