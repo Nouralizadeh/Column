@@ -13,33 +13,35 @@ interface Props{
 }
 
 function Grid(props:Props) {
-    let columns: { header?: any; accessor: any;render?:any;}[] = [];
+    let columns: { header?: any; accessor: any;render?:any; width:string|number}[] = [];
 
-    const onCellValueChange = (value:any,cell:any)=>{
-      let changedData= props.gridData.slice()
-      changedData[cell.row.id][cell.column.id]=value
+    const onCellValueChange = (value:any,key:string,row:any)=>{
+      debugger
+      let newRow = {...row}
+      newRow[key] = value
+      let changedData= props.gridData.slice().map(dataRow=>{if (JSON.stringify(dataRow)==JSON.stringify(row)) return newRow; else return dataRow })
       props.setGridData(changedData);
     }
     
     props.children.map((child: any) =>{       
       columns.push({
-      // header: child.props.header, 
+      width:"800",
+      title: child.props.header, 
       accessor: child.key,
-      // render: (a) => a,
-      // Cell: child.props.render?
-      //       ({cell}:{cell:any;})=>child.props.render(cell.getValue<string>(),(value:any)=>onCellValueChange(value,cell)):
-      //       undefined
+      render:child.props.render?
+            (row: any)=>child.props.render(row[child.key],(value:any)=>onCellValueChange(value,child.key,row)):
+            undefined,
     })
   }
     
     );
     const data=props.gridData
-    // const table = useMantineReactTable({
-    //   columns,
-    //   data, //must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
-    // });
-    
-  return  <DataTable columns={columns} records={data} />;
+  return  <DataTable withTableBorder
+                    withColumnBorders
+                    striped
+                    columns={columns} 
+                    records={data}
+                    />;
 }
 
 export default Grid
